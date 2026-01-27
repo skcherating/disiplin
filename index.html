@@ -6,6 +6,7 @@
     <title>Laporan Disiplin SK Cherating</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         body {
@@ -82,33 +83,46 @@
             transform: scale(0.98);
         }
         
+        /* STYLE BARU UNTUK PREVIEW GAMBAR & BUTANG DELETE */
         .preview-container {
             display: grid;
             grid-template-columns: 1fr 1fr; 
-            gap: 10px;
+            gap: 15px;
             margin-top: 15px;
         }
-        .preview-box {
-            background: #f1f1f1;
-            border-radius: 8px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px dashed #ccc;
+        .preview-item {
             position: relative;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
         }
-        .preview-box img {
+        .preview-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; 
         }
-        .preview-placeholder {
-            font-size: 0.7rem;
-            color: #888;
-            text-align: center;
+        .btn-delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+        .btn-delete:hover {
+            background-color: #bb2d3b;
         }
         
         .loading {
@@ -160,18 +174,10 @@
                 <div class="mb-3">
                     <label for="mediaFiles" class="form-label">Muat Naik Bukti (Max 2)</label>
                     <input type="file" class="form-control" id="mediaFiles" accept="image/*" multiple>
-                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">* Tarikh & Masa direkod secara automatik.</div>
+                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">* Klik butang merah (X) pada gambar untuk padam.</div>
                     
-                    <div class="preview-container">
-                        <div class="preview-box">
-                            <span class="preview-placeholder">Gambar 1</span>
-                            <img id="imgPreview1">
+                    <div class="preview-container" id="previewContainer">
                         </div>
-                        <div class="preview-box">
-                            <span class="preview-placeholder">Gambar 2</span>
-                            <img id="imgPreview2">
-                        </div>
-                    </div>
                 </div>
 
                 <button type="submit" class="btn-hantar">HANTAR LAPORAN</button>
@@ -185,45 +191,88 @@
     </div>
 
     <script>
-        // --- URL WEB APP BARU TELAH DIKEMASKINI ---
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw8q6KqwqZ6KtdfW65qM-UmeSZF_hFyEaYuKi7yyL8oXwlFEjLK4juCKX5m-WOJjP80/exec'; 
 
         const fileInput = document.getElementById('mediaFiles');
-        const imgPreview1 = document.getElementById('imgPreview1');
-        const imgPreview2 = document.getElementById('imgPreview2');
-        const placeholders = document.querySelectorAll('.preview-placeholder');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        // DataTransfer object untuk memanipulasi fail input
+        let dt = new DataTransfer();
 
         fileInput.addEventListener('change', function(e) {
-            const files = e.target.files;
+            // Tambah fail baru ke dalam senarai sedia ada (jika mahu append)
+            // Atau reset dt jika mahu replace setiap kali choose file
+            // Di sini kita reset supaya behavior dia standard (pilih baru ganti lama)
+            dt = new DataTransfer();
             
-            imgPreview1.style.display = 'none';
-            imgPreview2.style.display = 'none';
-            placeholders.forEach(p => p.style.display = 'block');
-
-            if (files.length > 2) {
-                alert("Maksimum 2 gambar sahaja dibenarkan.");
-                fileInput.value = "";
-                return;
+            for (let file of this.files) {
+                if (file.type.startsWith('image/')) {
+                    dt.items.add(file);
+                }
             }
 
-            Array.from(files).forEach((file, index) => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        if (index === 0) {
-                            imgPreview1.src = e.target.result;
-                            imgPreview1.style.display = 'block';
-                            placeholders[0].style.display = 'none';
-                        } else if (index === 1) {
-                            imgPreview2.src = e.target.result;
-                            imgPreview2.style.display = 'block';
-                            placeholders[1].style.display = 'none';
-                        }
-                    }
-                    reader.readAsDataURL(file);
+            // Semak had 2 fail
+            if (dt.files.length > 2) {
+                alert("Maksimum 2 gambar sahaja dibenarkan.");
+                // Ambil 2 yang pertama sahaja
+                let newDt = new DataTransfer();
+                newDt.items.add(dt.files[0]);
+                newDt.items.add(dt.files[1]);
+                dt = newDt;
+            }
+
+            // Update input file dengan senarai baru
+            fileInput.files = dt.files;
+            
+            // Render preview
+            renderPreviews();
+        });
+
+        function renderPreviews() {
+            previewContainer.innerHTML = ''; // Kosongkan container
+
+            Array.from(dt.files).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Buat elemen HTML untuk gambar + butang delete
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-delete';
+                    btn.innerHTML = '<i class="fas fa-times"></i>'; // Ikon X
+                    btn.type = 'button'; // Penting supaya tak submit form
+                    
+                    // Fungsi Delete
+                    btn.onclick = function() {
+                        removeFile(index);
+                    };
+
+                    div.appendChild(img);
+                    div.appendChild(btn);
+                    previewContainer.appendChild(div);
+                }
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeFile(indexToRemove) {
+            const newDt = new DataTransfer();
+            
+            // Masukkan semua fail KECUALI yang index dia sama dengan yang nak dibuang
+            Array.from(dt.files).forEach((file, index) => {
+                if (index !== indexToRemove) {
+                    newDt.items.add(file);
                 }
             });
-        });
+
+            dt = newDt;
+            fileInput.files = dt.files; // Update input file sebenar
+            renderPreviews(); // Lukis semula preview
+        }
 
         document.getElementById('laporanForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -231,10 +280,10 @@
             document.getElementById('loadingScreen').style.display = 'flex';
 
             const nama = document.getElementById('nama').value;
-            const namaMurid = document.getElementById('namaMurid').value; // Ambil nilai nama murid
+            const namaMurid = document.getElementById('namaMurid').value;
             const tempat = document.getElementById('tempat').value;
             const ringkasan = document.getElementById('ringkasan').value;
-            const files = document.getElementById('mediaFiles').files;
+            const files = fileInput.files; // Ambil terus dari input yang dah dimanipulasi
 
             const readFile = (file) => {
                 return new Promise((resolve, reject) => {
@@ -254,7 +303,7 @@
             Promise.all(filePromises).then(fileData => {
                 const payload = {
                     nama: nama,
-                    namaMurid: namaMurid, // Masukkan dalam payload
+                    namaMurid: namaMurid,
                     tempat: tempat,
                     ringkasan: ringkasan,
                     files: fileData
@@ -270,9 +319,8 @@
                     if(data.result === 'success') {
                         alert('Laporan Berjaya Dihantar!');
                         document.getElementById('laporanForm').reset();
-                        imgPreview1.style.display = 'none';
-                        imgPreview2.style.display = 'none';
-                        placeholders.forEach(p => p.style.display = 'block');
+                        dt = new DataTransfer(); // Reset variable file
+                        renderPreviews(); // Kosongkan preview
                     } else {
                         alert('Ralat: ' + JSON.stringify(data));
                     }
