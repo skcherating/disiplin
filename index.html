@@ -28,7 +28,6 @@
             background: white;
             text-align: center;
         }
-        
         .main-logo {
             height: 70px; 
             width: auto;
@@ -36,7 +35,6 @@
             margin: 0 auto 15px auto; 
             object-fit: contain;
         }
-
         .app-title {
             font-weight: 700;
             font-size: 1.1rem;
@@ -54,7 +52,6 @@
             font-size: 0.9rem;
             color: #555;
             margin-bottom: 8px;
-            text-align: left;
             display: block;
         }
         .form-control {
@@ -62,10 +59,6 @@
             padding: 10px 15px;
             border: 1px solid #ddd;
             background-color: #f9f9f9;
-        }
-        .form-control:focus {
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
         }
         .btn-hantar {
             background: linear-gradient(135deg, #0d6efd, #0043a8);
@@ -75,66 +68,115 @@
             border-radius: 8px;
             width: 100%;
             font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-top: 10px;
-            transition: transform 0.2s;
-        }
-        .btn-hantar:active {
-            transform: scale(0.98);
+            margin-top: 20px;
         }
         
-        /* STYLE BARU UNTUK PREVIEW GAMBAR & BUTANG DELETE */
-        .preview-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .preview-item {
-            position: relative;
-            height: 120px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #ddd;
+        /* STYLE KHAS UNTUK SENARAI MURID */
+        .student-input-group {
             background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 10px;
         }
-        .preview-item img {
+        .role-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .role-btn {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .role-btn.active-pelaku {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        .role-btn.active-mangsa {
+            background-color: #198754;
+            color: white;
+            border-color: #198754;
+        }
+        .btn-add-student {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .btn-delete {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: rgba(220, 53, 69, 0.9);
+            background-color: #6c757d;
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .student-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .student-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-            transition: background 0.2s;
-            z-index: 10;
+            padding: 10px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            animation: fadeIn 0.3s;
         }
-        .btn-delete:hover {
-            background-color: #bb2d3b;
-        }
-        
-        .loading {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(255,255,255,0.9);
-            z-index: 9999;
-            display: none;
+        .student-info {
+            display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
+        .student-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .badge-role {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            width: fit-content;
+            margin-top: 2px;
+        }
+        .badge-pelaku { background: #ffe6e6; color: #dc3545; }
+        .badge-mangsa { background: #e6f6ec; color: #198754; }
+        
+        .btn-remove-student {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* STYLE GAMBAR */
+        .preview-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;
+        }
+        .preview-item {
+            position: relative; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;
+        }
+        .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+        .btn-delete-img {
+            position: absolute; top: 5px; right: 5px; background: rgba(220,53,69,0.9); color: white;
+            border-radius: 50%; width: 20px; height: 20px; border: none; font-size: 10px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9);
+            z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -142,10 +184,7 @@
     <div class="app-card">
         <div class="app-header">
             <img src="logo_sekolah.jpg" alt="Logo SK Cherating" class="main-logo">
-            
-            <div class="app-title">
-                PELAPORAN DISIPLIN<br>SK CHERATING
-            </div>
+            <div class="app-title">PELAPORAN DISIPLIN<br>SK CHERATING</div>
         </div>
 
         <div class="app-body">
@@ -157,27 +196,43 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="namaMurid" class="form-label">Nama Murid</label>
-                    <input type="text" class="form-control" id="namaMurid" required placeholder="Nama Murid Yang Terlibat">
-                </div>
+                    <label class="form-label">Maklumat Murid Terlibat</label>
+                    
+                    <div class="student-input-group">
+                        <input type="text" class="form-control" id="inputNamaMurid" placeholder="Nama Murid">
+                        
+                        <div class="role-selector">
+                            <div class="role-btn active-pelaku" onclick="selectRole('Pelaku')" id="btnPelaku">
+                                <i class="fas fa-exclamation-circle"></i> Pelaku
+                            </div>
+                            <div class="role-btn" onclick="selectRole('Mangsa')" id="btnMangsa">
+                                <i class="fas fa-user-shield"></i> Mangsa
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn-add-student" onclick="addStudent()">
+                            <i class="fas fa-plus"></i> Tambah Murid Ke Senarai
+                        </button>
+                    </div>
+
+                    <ul class="student-list" id="studentListContainer">
+                        </ul>
+                    <input type="hidden" id="studentDataJSON" required> </div>
 
                 <div class="mb-3">
                     <label for="tempat" class="form-label">Tempat Kejadian</label>
-                    <input type="text" class="form-control" id="tempat" required placeholder="Contoh: Kantin, Kelas 5 Bestari">
+                    <input type="text" class="form-control" id="tempat" required placeholder="Contoh: Kantin">
                 </div>
 
                 <div class="mb-3">
                     <label for="ringkasan" class="form-label">Ringkasan Laporan</label>
-                    <textarea class="form-control" id="ringkasan" rows="4" required placeholder="Sila tulis ringkasan kejadian di sini..."></textarea>
+                    <textarea class="form-control" id="ringkasan" rows="4" required></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="mediaFiles" class="form-label">Muat Naik Bukti (Max 2)</label>
+                    <label class="form-label">Bukti (Gambar) - Max 2</label>
                     <input type="file" class="form-control" id="mediaFiles" accept="image/*" multiple>
-                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">* Klik butang merah (X) pada gambar untuk padam.</div>
-                    
-                    <div class="preview-container" id="previewContainer">
-                        </div>
+                    <div class="preview-container" id="previewContainer"></div>
                 </div>
 
                 <button type="submit" class="btn-hantar">HANTAR LAPORAN</button>
@@ -186,124 +241,141 @@
     </div>
 
     <div class="loading" id="loadingScreen">
-        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <div class="spinner-border text-primary mb-3"></div>
         <div style="font-weight: 600;">Sedang Menghantar...</div>
     </div>
 
     <script>
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw8q6KqwqZ6KtdfW65qM-UmeSZF_hFyEaYuKi7yyL8oXwlFEjLK4juCKX5m-WOJjP80/exec'; 
 
+        // --- LOGIC SENARAI MURID ---
+        let currentRole = 'Pelaku';
+        let studentList = [];
+
+        function selectRole(role) {
+            currentRole = role;
+            document.getElementById('btnPelaku').className = role === 'Pelaku' ? 'role-btn active-pelaku' : 'role-btn';
+            document.getElementById('btnMangsa').className = role === 'Mangsa' ? 'role-btn active-mangsa' : 'role-btn';
+        }
+
+        function addStudent() {
+            const nameInput = document.getElementById('inputNamaMurid');
+            const name = nameInput.value.trim();
+
+            if (name === "") {
+                alert("Sila masukkan nama murid.");
+                return;
+            }
+
+            // Tambah ke array
+            studentList.push({ nama: name, peranan: currentRole });
+            
+            // Render dan Reset
+            renderStudentList();
+            nameInput.value = "";
+            nameInput.focus();
+        }
+
+        function removeStudent(index) {
+            studentList.splice(index, 1);
+            renderStudentList();
+        }
+
+        function renderStudentList() {
+            const listContainer = document.getElementById('studentListContainer');
+            listContainer.innerHTML = "";
+
+            studentList.forEach((student, index) => {
+                const li = document.createElement('li');
+                li.className = 'student-item';
+                
+                const badgeClass = student.peranan === 'Pelaku' ? 'badge-pelaku' : 'badge-mangsa';
+
+                li.innerHTML = `
+                    <div class="student-info">
+                        <span class="student-name">${student.nama}</span>
+                        <span class="badge-role ${badgeClass}">${student.peranan}</span>
+                    </div>
+                    <button type="button" class="btn-remove-student" onclick="removeStudent(${index})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                `;
+                listContainer.appendChild(li);
+            });
+        }
+
+
+        // --- LOGIC GAMBAR (DataTransfer) ---
         const fileInput = document.getElementById('mediaFiles');
         const previewContainer = document.getElementById('previewContainer');
-        
-        // DataTransfer object untuk memanipulasi fail input
         let dt = new DataTransfer();
 
         fileInput.addEventListener('change', function(e) {
-            // Tambah fail baru ke dalam senarai sedia ada (jika mahu append)
-            // Atau reset dt jika mahu replace setiap kali choose file
-            // Di sini kita reset supaya behavior dia standard (pilih baru ganti lama)
-            dt = new DataTransfer();
-            
+            dt = new DataTransfer(); // Reset untuk simple logic (replace all)
             for (let file of this.files) {
-                if (file.type.startsWith('image/')) {
-                    dt.items.add(file);
-                }
+                if (file.type.startsWith('image/')) dt.items.add(file);
             }
-
-            // Semak had 2 fail
             if (dt.files.length > 2) {
-                alert("Maksimum 2 gambar sahaja dibenarkan.");
-                // Ambil 2 yang pertama sahaja
+                alert("Maksimum 2 gambar sahaja.");
                 let newDt = new DataTransfer();
-                newDt.items.add(dt.files[0]);
-                newDt.items.add(dt.files[1]);
+                newDt.items.add(dt.files[0]); newDt.items.add(dt.files[1]);
                 dt = newDt;
             }
-
-            // Update input file dengan senarai baru
             fileInput.files = dt.files;
-            
-            // Render preview
             renderPreviews();
         });
 
         function renderPreviews() {
-            previewContainer.innerHTML = ''; // Kosongkan container
-
+            previewContainer.innerHTML = '';
             Array.from(dt.files).forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Buat elemen HTML untuk gambar + butang delete
                     const div = document.createElement('div');
                     div.className = 'preview-item';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    
-                    const btn = document.createElement('button');
-                    btn.className = 'btn-delete';
-                    btn.innerHTML = '<i class="fas fa-times"></i>'; // Ikon X
-                    btn.type = 'button'; // Penting supaya tak submit form
-                    
-                    // Fungsi Delete
-                    btn.onclick = function() {
-                        removeFile(index);
-                    };
-
-                    div.appendChild(img);
-                    div.appendChild(btn);
+                    div.innerHTML = `<img src="${e.target.result}"><button type="button" class="btn-delete-img" onclick="removeFile(${index})"><i class="fas fa-times"></i></button>`;
                     previewContainer.appendChild(div);
                 }
                 reader.readAsDataURL(file);
             });
         }
 
-        function removeFile(indexToRemove) {
+        function removeFile(index) {
             const newDt = new DataTransfer();
-            
-            // Masukkan semua fail KECUALI yang index dia sama dengan yang nak dibuang
-            Array.from(dt.files).forEach((file, index) => {
-                if (index !== indexToRemove) {
-                    newDt.items.add(file);
-                }
-            });
-
+            Array.from(dt.files).forEach((f, i) => { if (i !== index) newDt.items.add(f); });
             dt = newDt;
-            fileInput.files = dt.files; // Update input file sebenar
-            renderPreviews(); // Lukis semula preview
+            fileInput.files = dt.files;
+            renderPreviews();
         }
 
+        // --- SUBMIT FORM ---
         document.getElementById('laporanForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            if (studentList.length === 0) {
+                alert("Sila tambah sekurang-kurangnya seorang murid (Klik butang 'Tambah Murid').");
+                return;
+            }
 
             document.getElementById('loadingScreen').style.display = 'flex';
 
             const nama = document.getElementById('nama').value;
-            const namaMurid = document.getElementById('namaMurid').value;
             const tempat = document.getElementById('tempat').value;
             const ringkasan = document.getElementById('ringkasan').value;
-            const files = fileInput.files; // Ambil terus dari input yang dah dimanipulasi
-
-            const readFile = (file) => {
+            
+            // Baca fail gambar
+            const filePromises = Array.from(fileInput.files).map(file => {
                 return new Promise((resolve, reject) => {
                     const reader = new FileReader();
-                    reader.onload = () => resolve({
-                        base64: reader.result,
-                        type: file.type,
-                        name: file.name
-                    });
+                    reader.onload = () => resolve({ base64: reader.result, type: file.type, name: file.name });
                     reader.onerror = reject;
                     reader.readAsDataURL(file);
                 });
-            };
-
-            const filePromises = Array.from(files).map(readFile);
+            });
 
             Promise.all(filePromises).then(fileData => {
                 const payload = {
                     nama: nama,
-                    namaMurid: namaMurid,
+                    senaraiMurid: studentList, // Hantar array objek murid
                     tempat: tempat,
                     ringkasan: ringkasan,
                     files: fileData
@@ -319,8 +391,10 @@
                     if(data.result === 'success') {
                         alert('Laporan Berjaya Dihantar!');
                         document.getElementById('laporanForm').reset();
-                        dt = new DataTransfer(); // Reset variable file
-                        renderPreviews(); // Kosongkan preview
+                        studentList = []; // Kosongkan senarai
+                        renderStudentList();
+                        dt = new DataTransfer();
+                        renderPreviews();
                     } else {
                         alert('Ralat: ' + JSON.stringify(data));
                     }
@@ -328,7 +402,6 @@
                 .catch(err => {
                     document.getElementById('loadingScreen').style.display = 'none';
                     alert('Gagal menyambung ke server.');
-                    console.error(err);
                 });
             });
         });
