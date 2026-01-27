@@ -9,402 +9,253 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        body {
-            background-color: #eef2f7;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-        }
-        .app-card {
-            max-width: 550px;
-            margin: 30px auto;
-            background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border-top: 5px solid #0d6efd;
-        }
-        .app-header {
-            padding: 30px 25px 10px 25px;
-            background: white;
-            text-align: center;
-        }
-        .main-logo {
-            height: 70px; 
-            width: auto;
-            display: block;
-            margin: 0 auto 15px auto; 
-            object-fit: contain;
-        }
-        .app-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #1a1a1a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        .app-body {
-            padding: 25px;
-        }
-        .form-label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .form-control {
-            border-radius: 8px;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
-        }
-        .btn-hantar {
-            background: linear-gradient(135deg, #0d6efd, #0043a8);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            width: 100%;
-            font-weight: 600;
-            margin-top: 20px;
-        }
+        body { background-color: #eef2f7; font-family: 'Poppins', sans-serif; color: #333; }
+        .app-card { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border-top: 5px solid #0d6efd; }
+        .app-header { padding: 30px 25px 10px 25px; background: white; text-align: center; }
+        .main-logo { height: 80px; width: auto; display: block; margin: 0 auto 15px auto; object-fit: contain; }
+        .app-title { font-weight: 700; font-size: 1.2rem; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .app-body { padding: 25px; }
         
-        /* STYLE KHAS UNTUK SENARAI MURID */
-        .student-input-group {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-            margin-bottom: 10px;
-        }
-        .role-selector {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .role-btn {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            background: white;
-            color: #555;
-            font-weight: 500;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        .role-btn.active-pelaku {
-            background-color: #dc3545;
-            color: white;
-            border-color: #dc3545;
-        }
-        .role-btn.active-mangsa {
-            background-color: #198754;
-            color: white;
-            border-color: #198754;
-        }
-        .btn-add-student {
-            width: 100%;
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-        .student-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 10px;
-        }
-        .student-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background: white;
-            border-bottom: 1px solid #eee;
-            animation: fadeIn 0.3s;
-        }
-        .student-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .student-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .badge-role {
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            width: fit-content;
-            margin-top: 2px;
-        }
-        .badge-pelaku { background: #ffe6e6; color: #dc3545; }
-        .badge-mangsa { background: #e6f6ec; color: #198754; }
+        /* STYLE INPUT MURID */
+        .student-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef; margin-bottom: 15px; }
+        .role-btn-group { display: flex; gap: 5px; margin-top: 5px; }
+        .role-btn { flex: 1; padding: 8px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         
-        .btn-remove-student {
-            color: #dc3545;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
+        /* Warna Butang Pilihan */
+        .role-btn.pelaku-mode { color: #dc3545; border-color: #dc3545; }
+        .role-btn.pelaku-mode.active { background: #dc3545; color: white; }
+        
+        .role-btn.mangsa-mode { color: #198754; border-color: #198754; }
+        .role-btn.mangsa-mode.active { background: #198754; color: white; }
 
-        /* STYLE GAMBAR */
-        .preview-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;
-        }
-        .preview-item {
-            position: relative; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;
-        }
-        .preview-item img { width: 100%; height: 100%; object-fit: cover; }
-        .btn-delete-img {
-            position: absolute; top: 5px; right: 5px; background: rgba(220,53,69,0.9); color: white;
-            border-radius: 50%; width: 20px; height: 20px; border: none; font-size: 10px;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-        }
+        .btn-add { width: 100%; margin-top: 10px; background: #6c757d; color: white; border: none; padding: 8px; border-radius: 5px; }
+        .btn-add:hover { background: #5a6268; }
 
-        /* Loading */
-        .loading {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9);
-            z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        /* SENARAI MURID */
+        .list-group-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
+        .badge-pelaku { background: #ffe6e6; color: #dc3545; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
+        .badge-mangsa { background: #e6f6ec; color: #198754; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
+        .btn-remove { color: #aaa; cursor: pointer; border: none; background: none; }
+        .btn-remove:hover { color: #dc3545; }
+
+        /* GAMBAR */
+        .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .preview-box { position: relative; height: 100px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; }
+        .preview-box img { width: 100%; height: 100%; object-fit: cover; }
+        .btn-del-img { position: absolute; top: 2px; right: 2px; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 10px; border: none; cursor: pointer; }
+
+        .btn-submit { background: #0d6efd; color: white; width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+        .loading { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; display:none; flex-direction:column; justify-content:center; align-items:center; }
     </style>
 </head>
 <body>
 
-    <div class="app-card">
-        <div class="app-header">
-            <img src="logo_sekolah.jpg" alt="Logo SK Cherating" class="main-logo">
-            <div class="app-title">PELAPORAN DISIPLIN<br>SK CHERATING</div>
-        </div>
+<div class="app-card">
+    <div class="app-header">
+        <img src="logo_sekolah.jpg" alt="Logo" class="main-logo">
+        <div class="app-title">PELAPORAN DISIPLIN<br>SK CHERATING</div>
+    </div>
 
-        <div class="app-body">
-            <form id="laporanForm">
-                
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Pelapor</label>
-                    <input type="text" class="form-control" id="nama" required placeholder="Nama Guru / Staff">
-                </div>
+    <div class="app-body">
+        <form id="formLaporan">
+            
+            <div class="mb-3">
+                <label class="form-label">Nama Pelapor</label>
+                <input type="text" id="nama" class="form-control" required placeholder="Nama Guru/Staf">
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Maklumat Murid Terlibat</label>
+            <div class="mb-3">
+                <label class="form-label">Maklumat Murid</label>
+                <div class="student-section">
+                    <input type="text" id="inputMurid" class="form-control" placeholder="Masukkan Nama Murid">
                     
-                    <div class="student-input-group">
-                        <input type="text" class="form-control" id="inputNamaMurid" placeholder="Nama Murid">
-                        
-                        <div class="role-selector">
-                            <div class="role-btn active-pelaku" onclick="selectRole('Pelaku')" id="btnPelaku">
-                                <i class="fas fa-exclamation-circle"></i> Pelaku
-                            </div>
-                            <div class="role-btn" onclick="selectRole('Mangsa')" id="btnMangsa">
-                                <i class="fas fa-user-shield"></i> Mangsa
-                            </div>
+                    <div class="role-btn-group">
+                        <button type="button" class="role-btn pelaku-mode active" id="btnPelaku" onclick="setRole('Pelaku')">PELAKU</button>
+                        <button type="button" class="role-btn mangsa-mode" id="btnMangsa" onclick="setRole('Mangsa')">MANGSA</button>
+                    </div>
+
+                    <button type="button" class="btn-add" onclick="tambahMurid()">+ Tambah Ke Senarai</button>
+                </div>
+
+                <ul class="list-group" id="senaraiPaparan"></ul>
+                <div id="tiadaMuridMsg" style="font-size:0.8rem; color:#888; text-align:center; margin-top:5px;">Belum ada murid ditambah.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tempat Kejadian</label>
+                <input type="text" id="tempat" class="form-control" required placeholder="Contoh: Kantin">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ringkasan Laporan</label>
+                <textarea id="ringkasan" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gambar Bukti (Max 2)</label>
+                <input type="file" id="files" class="form-control" accept="image/*" multiple>
+                <div class="preview-grid" id="previewGrid"></div>
+            </div>
+
+            <button type="submit" class="btn-submit">HANTAR LAPORAN</button>
+        </form>
+    </div>
+</div>
+
+<div class="loading" id="loading">
+    <div class="spinner-border text-primary"></div>
+    <div class="mt-2 fw-bold">Sedang Menghantar...</div>
+</div>
+
+<script>
+    // --- URL WEB APP YANG BETUL ---
+    const APP_URL = "https://script.google.com/macros/s/AKfycbw8j2EnihCLagap05bGpgQ4lbbpRPdsK0-3mS8msG4zSOgtwUHP3Ym-8xE1fD7K5Nek/exec"; 
+
+    // --- LOGIC MURID ---
+    let senaraiMurid = [];
+    let currentRole = 'Pelaku';
+
+    function setRole(role) {
+        currentRole = role;
+        // Update UI butang
+        if(role === 'Pelaku') {
+            document.getElementById('btnPelaku').classList.add('active');
+            document.getElementById('btnMangsa').classList.remove('active');
+        } else {
+            document.getElementById('btnPelaku').classList.remove('active');
+            document.getElementById('btnMangsa').classList.add('active');
+        }
+    }
+
+    function tambahMurid() {
+        let nama = document.getElementById('inputMurid').value.trim();
+        if(!nama) return alert("Sila masukkan nama murid.");
+
+        senaraiMurid.push({ nama: nama, peranan: currentRole });
+        document.getElementById('inputMurid').value = ""; // Clear input
+        renderList();
+    }
+
+    function padamMurid(index) {
+        senaraiMurid.splice(index, 1);
+        renderList();
+    }
+
+    function renderList() {
+        let listHtml = document.getElementById('senaraiPaparan');
+        let msg = document.getElementById('tiadaMuridMsg');
+        listHtml.innerHTML = "";
+
+        if(senaraiMurid.length === 0) {
+            msg.style.display = 'block';
+        } else {
+            msg.style.display = 'none';
+            senaraiMurid.forEach((m, i) => {
+                let badge = m.peranan === 'Pelaku' ? 'badge-pelaku' : 'badge-mangsa';
+                let item = `
+                    <li class="list-group-item">
+                        <div>
+                            <span class="${badge}">${m.peranan}</span> 
+                            <span class="fw-bold ms-2">${m.nama}</span>
                         </div>
-                        
-                        <button type="button" class="btn-add-student" onclick="addStudent()">
-                            <i class="fas fa-plus"></i> Tambah Murid Ke Senarai
-                        </button>
-                    </div>
-
-                    <ul class="student-list" id="studentListContainer">
-                        </ul>
-                    <input type="hidden" id="studentDataJSON" required> </div>
-
-                <div class="mb-3">
-                    <label for="tempat" class="form-label">Tempat Kejadian</label>
-                    <input type="text" class="form-control" id="tempat" required placeholder="Contoh: Kantin">
-                </div>
-
-                <div class="mb-3">
-                    <label for="ringkasan" class="form-label">Ringkasan Laporan</label>
-                    <textarea class="form-control" id="ringkasan" rows="4" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Bukti (Gambar) - Max 2</label>
-                    <input type="file" class="form-control" id="mediaFiles" accept="image/*" multiple>
-                    <div class="preview-container" id="previewContainer"></div>
-                </div>
-
-                <button type="submit" class="btn-hantar">HANTAR LAPORAN</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="loading" id="loadingScreen">
-        <div class="spinner-border text-primary mb-3"></div>
-        <div style="font-weight: 600;">Sedang Menghantar...</div>
-    </div>
-
-    <script>
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw8q6KqwqZ6KtdfW65qM-UmeSZF_hFyEaYuKi7yyL8oXwlFEjLK4juCKX5m-WOJjP80/exec'; 
-
-        // --- LOGIC SENARAI MURID ---
-        let currentRole = 'Pelaku';
-        let studentList = [];
-
-        function selectRole(role) {
-            currentRole = role;
-            document.getElementById('btnPelaku').className = role === 'Pelaku' ? 'role-btn active-pelaku' : 'role-btn';
-            document.getElementById('btnMangsa').className = role === 'Mangsa' ? 'role-btn active-mangsa' : 'role-btn';
-        }
-
-        function addStudent() {
-            const nameInput = document.getElementById('inputNamaMurid');
-            const name = nameInput.value.trim();
-
-            if (name === "") {
-                alert("Sila masukkan nama murid.");
-                return;
-            }
-
-            // Tambah ke array
-            studentList.push({ nama: name, peranan: currentRole });
-            
-            // Render dan Reset
-            renderStudentList();
-            nameInput.value = "";
-            nameInput.focus();
-        }
-
-        function removeStudent(index) {
-            studentList.splice(index, 1);
-            renderStudentList();
-        }
-
-        function renderStudentList() {
-            const listContainer = document.getElementById('studentListContainer');
-            listContainer.innerHTML = "";
-
-            studentList.forEach((student, index) => {
-                const li = document.createElement('li');
-                li.className = 'student-item';
-                
-                const badgeClass = student.peranan === 'Pelaku' ? 'badge-pelaku' : 'badge-mangsa';
-
-                li.innerHTML = `
-                    <div class="student-info">
-                        <span class="student-name">${student.nama}</span>
-                        <span class="badge-role ${badgeClass}">${student.peranan}</span>
-                    </div>
-                    <button type="button" class="btn-remove-student" onclick="removeStudent(${index})">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                        <button type="button" class="btn-remove" onclick="padamMurid(${i})"><i class="fas fa-trash"></i></button>
+                    </li>
                 `;
-                listContainer.appendChild(li);
+                listHtml.innerHTML += item;
             });
         }
+    }
 
+    // --- LOGIC GAMBAR ---
+    let dt = new DataTransfer();
+    document.getElementById('files').addEventListener('change', function(){
+        dt = new DataTransfer(); 
+        for(let f of this.files) if(f.type.startsWith('image/')) dt.items.add(f);
+        
+        if(dt.files.length > 2) {
+            alert("Maksimum 2 gambar sahaja.");
+            return; 
+        }
+        this.files = dt.files;
+        renderImg();
+    });
 
-        // --- LOGIC GAMBAR (DataTransfer) ---
-        const fileInput = document.getElementById('mediaFiles');
-        const previewContainer = document.getElementById('previewContainer');
-        let dt = new DataTransfer();
+    function renderImg() {
+        let grid = document.getElementById('previewGrid');
+        grid.innerHTML = "";
+        Array.from(dt.files).forEach((f, i) => {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                grid.innerHTML += `
+                    <div class="preview-box">
+                        <img src="${e.target.result}">
+                        <button type="button" class="btn-del-img" onclick="delImg(${i})">X</button>
+                    </div>`;
+            };
+            reader.readAsDataURL(f);
+        });
+    }
 
-        fileInput.addEventListener('change', function(e) {
-            dt = new DataTransfer(); // Reset untuk simple logic (replace all)
-            for (let file of this.files) {
-                if (file.type.startsWith('image/')) dt.items.add(file);
-            }
-            if (dt.files.length > 2) {
-                alert("Maksimum 2 gambar sahaja.");
-                let newDt = new DataTransfer();
-                newDt.items.add(dt.files[0]); newDt.items.add(dt.files[1]);
-                dt = newDt;
-            }
-            fileInput.files = dt.files;
-            renderPreviews();
+    function delImg(index) {
+        let newDt = new DataTransfer();
+        Array.from(dt.files).forEach((f, i) => { if(i !== index) newDt.items.add(f); });
+        dt = newDt;
+        document.getElementById('files').files = dt.files;
+        renderImg();
+    }
+
+    // --- HANTAR ---
+    document.getElementById('formLaporan').addEventListener('submit', function(e){
+        e.preventDefault();
+        
+        if(senaraiMurid.length === 0) return alert("Sila tambah sekurang-kurangnya seorang murid.");
+
+        document.getElementById('loading').style.display = 'flex';
+
+        let nama = document.getElementById('nama').value;
+        let tempat = document.getElementById('tempat').value;
+        let ringkasan = document.getElementById('ringkasan').value;
+        
+        // Baca fail dulu
+        let filePromises = Array.from(dt.files).map(file => {
+            return new Promise((resolve, reject) => {
+                let r = new FileReader();
+                r.onload = () => resolve({ base64: r.result, type: file.type, name: file.name });
+                r.onerror = reject;
+                r.readAsDataURL(file);
+            });
         });
 
-        function renderPreviews() {
-            previewContainer.innerHTML = '';
-            Array.from(dt.files).forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const div = document.createElement('div');
-                    div.className = 'preview-item';
-                    div.innerHTML = `<img src="${e.target.result}"><button type="button" class="btn-delete-img" onclick="removeFile(${index})"><i class="fas fa-times"></i></button>`;
-                    previewContainer.appendChild(div);
+        Promise.all(filePromises).then(filesData => {
+            let payload = {
+                nama: nama,
+                senaraiMurid: senaraiMurid, 
+                tempat: tempat,
+                ringkasan: ringkasan,
+                files: filesData
+            };
+
+            fetch(APP_URL, {
+                method: "POST",
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(json => {
+                document.getElementById('loading').style.display = 'none';
+                if(json.result === 'success') {
+                    alert("Berjaya dihantar!");
+                    location.reload();
+                } else {
+                    alert("Ralat Script: " + json.error);
                 }
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function removeFile(index) {
-            const newDt = new DataTransfer();
-            Array.from(dt.files).forEach((f, i) => { if (i !== index) newDt.items.add(f); });
-            dt = newDt;
-            fileInput.files = dt.files;
-            renderPreviews();
-        }
-
-        // --- SUBMIT FORM ---
-        document.getElementById('laporanForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (studentList.length === 0) {
-                alert("Sila tambah sekurang-kurangnya seorang murid (Klik butang 'Tambah Murid').");
-                return;
-            }
-
-            document.getElementById('loadingScreen').style.display = 'flex';
-
-            const nama = document.getElementById('nama').value;
-            const tempat = document.getElementById('tempat').value;
-            const ringkasan = document.getElementById('ringkasan').value;
-            
-            // Baca fail gambar
-            const filePromises = Array.from(fileInput.files).map(file => {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve({ base64: reader.result, type: file.type, name: file.name });
-                    reader.onerror = reject;
-                    reader.readAsDataURL(file);
-                });
-            });
-
-            Promise.all(filePromises).then(fileData => {
-                const payload = {
-                    nama: nama,
-                    senaraiMurid: studentList, // Hantar array objek murid
-                    tempat: tempat,
-                    ringkasan: ringkasan,
-                    files: fileData
-                };
-
-                fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                    if(data.result === 'success') {
-                        alert('Laporan Berjaya Dihantar!');
-                        document.getElementById('laporanForm').reset();
-                        studentList = []; // Kosongkan senarai
-                        renderStudentList();
-                        dt = new DataTransfer();
-                        renderPreviews();
-                    } else {
-                        alert('Ralat: ' + JSON.stringify(data));
-                    }
-                })
-                .catch(err => {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                    alert('Gagal menyambung ke server.');
-                });
+            })
+            .catch(err => {
+                document.getElementById('loading').style.display = 'none';
+                alert("Gagal sambung ke server. Sila semak sambungan internet anda.");
             });
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
