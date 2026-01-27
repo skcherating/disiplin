@@ -1,314 +1,291 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ms">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Disiplin SK Cherating</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #eef2f7;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        .app-card {
+            max-width: 550px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border-top: 5px solid #0d6efd;
+        }
+        .app-header {
+            padding: 30px 25px 10px 25px;
+            background: white;
+            text-align: center;
+        }
+        
+        /* STYLE LOGO TENGAH */
+        .main-logo {
+            height: 70px; 
+            width: auto;
+            display: block;
+            margin: 0 auto 15px auto; 
+            object-fit: contain;
+        }
+
+        .app-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .app-body {
+            padding: 25px;
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 8px;
+            text-align: left;
+            display: block;
+        }
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .form-control:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+        }
+        .btn-hantar {
+            background: linear-gradient(135deg, #0d6efd, #0043a8);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        .btn-hantar:active {
+            transform: scale(0.98);
+        }
+        
+        /* Grid Preview Gambar */
+        .preview-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .preview-box {
+            background: #f1f1f1;
+            border-radius: 8px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px dashed #ccc;
+            position: relative;
+        }
+        .preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; 
+        }
+        .preview-placeholder {
+            font-size: 0.7rem;
+            color: #888;
+            text-align: center;
+        }
+        
+        /* Loading Overlay */
+        .loading {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.9);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ms"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Laporan Disiplin SK Cherating&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef2f7;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Poppins', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 550px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 30px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 30px rgba(0,0,0,0.08);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-top: 5px solid #0d6efd;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px 25px 10px 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.logos-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.school-logo, .ts25-logo {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 70px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>object-fit: contain;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-title {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a1a1a;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #eee;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.form-label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #555;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.form-control {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f9f9f9;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.form-control:focus {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-hantar {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #0d6efd, #0043a8);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-hantar:active {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.98);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Grid Preview Gambar 2x2 Style (dalam app preview sebelah menyebelah) */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.preview-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: 1fr 1fr;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.preview-box {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f1f1f1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px dashed #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.preview-box img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: none; /* Hidden by default */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.preview-placeholder {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.7rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #888;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Loading Overlay */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.loading {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 0; left: 0; right: 0; bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255,255,255,0.9);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>z-index: 9999;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="app-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="app-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="logos-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;img src="https://via.placeholder.com/150?text=SK+Cherating" alt="Logo SK Cherating" class="school-logo"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;img src="https://via.placeholder.com/150?text=TS25" alt="Logo TS25" class="ts25-logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="app-title"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>PELAPORAN DISIPLIN&lt;br&gt;SK CHERATING</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="app-body"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;form id="laporanForm"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="nama" class="form-label"&gt;Nama Pelapor&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" class="form-control" id="nama" required placeholder="Nama Guru / Staff"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="tempat" class="form-label"&gt;Tempat Kejadian&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" class="form-control" id="tempat" required placeholder="Contoh: Kantin, Kelas 5 Bestari"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="ringkasan" class="form-label"&gt;Ringkasan Laporan&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;textarea class="form-control" id="ringkasan" rows="4" required placeholder="Sila tulis ringkasan kejadian di sini..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="mediaFiles" class="form-label"&gt;Muat Naik Bukti (Max 2)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="file" class="form-control" id="mediaFiles" accept="image/*" multiple&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style="font-size: 0.8rem; color: #888; margin-top: 5px;"&gt;* Tarikh &amp; Masa direkod secara automatik.&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="preview-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="preview-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="preview-placeholder"&gt;Gambar 1&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img id="imgPreview1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="preview-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="preview-placeholder"&gt;Gambar 2&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img id="imgPreview2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;button type="submit" class="btn-hantar"&gt;HANTAR LAPORAN&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/form&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="loading" id="loadingScreen"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="spinner-border text-primary mb-3" role="status"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="font-weight: 600;"&gt;Sedang Menghantar...&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- PENTING: GANTIKAN URL INI DENGAN URL WEB APP ANDA ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const WEB_APP_URL = 'URL_WEB_APP_ANDA_DI_SINI';<span class="Apple-converted-space"> </span></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Logic Preview Gambar</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const fileInput = document.getElementById('mediaFiles');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const imgPreview1 = document.getElementById('imgPreview1');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const imgPreview2 = document.getElementById('imgPreview2');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const placeholders = document.querySelectorAll('.preview-placeholder');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>fileInput.addEventListener('change', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const files = e.target.files;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Reset</p>
-<p class="p1"><span class="Apple-converted-space">            </span>imgPreview1.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>imgPreview2.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>placeholders.forEach(p =&gt; p.style.display = 'block');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (files.length &gt; 2) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>alert("Maksimum 2 gambar sahaja dibenarkan.");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>fileInput.value = "";</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Loop untuk preview</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Array.from(files).forEach((file, index) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (file.type.startsWith('image/')) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const reader = new FileReader();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reader.onload = function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (index === 0) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>imgPreview1.src = e.target.result;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>imgPreview1.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>placeholders[0].style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>} else if (index === 1) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>imgPreview2.src = e.target.result;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>imgPreview2.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>placeholders[1].style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reader.readAsDataURL(file);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Logic Hantar Borang</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('laporanForm').addEventListener('submit', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (WEB_APP_URL.includes('URL_WEB_APP')) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>alert('Sila masukkan URL Web App Google Script dalam kod HTML!');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('loadingScreen').style.display = 'flex';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const nama = document.getElementById('nama').value;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const tempat = document.getElementById('tempat').value;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const ringkasan = document.getElementById('ringkasan').value;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const files = document.getElementById('mediaFiles').files;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Fungsi baca fail</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const readFile = (file) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return new Promise((resolve, reject) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const reader = new FileReader();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reader.onload = () =&gt; resolve({</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>base64: reader.result,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: file.type,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: file.name</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reader.onerror = reject;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reader.readAsDataURL(file);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const filePromises = Array.from(files).map(readFile);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>Promise.all(filePromises).then(fileData =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const payload = {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>nama: nama,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>tempat: tempat,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ringkasan: ringkasan,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>files: fileData</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>fetch(WEB_APP_URL, {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>})</p>
-<p class="p1"><span class="Apple-converted-space">                </span>.then(res =&gt; res.json())</p>
-<p class="p1"><span class="Apple-converted-space">                </span>.then(data =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById('loadingScreen').style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if(data.result === 'success') {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>alert('Laporan Berjaya Dihantar!');</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>// Reset borang</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>document.getElementById('laporanForm').reset();</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>imgPreview1.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>imgPreview2.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>placeholders.forEach(p =&gt; p.style.display = 'block');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>alert('Ralat: ' + JSON.stringify(data));</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>})</p>
-<p class="p1"><span class="Apple-converted-space">                </span>.catch(err =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById('loadingScreen').style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>alert('Gagal menyambung ke server.');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>console.error(err);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+    <div class="app-card">
+        <div class="app-header">
+            <img src="logo_sekolah.jpg" alt="Logo SK Cherating" class="main-logo">
+            
+            <div class="app-title">
+                PELAPORAN DISIPLIN<br>SK CHERATING
+            </div>
+        </div>
+
+        <div class="app-body">
+            <form id="laporanForm">
+                
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama Pelapor</label>
+                    <input type="text" class="form-control" id="nama" required placeholder="Nama Guru / Staff">
+                </div>
+
+                <div class="mb-3">
+                    <label for="tempat" class="form-label">Tempat Kejadian</label>
+                    <input type="text" class="form-control" id="tempat" required placeholder="Contoh: Kantin, Kelas 5 Bestari">
+                </div>
+
+                <div class="mb-3">
+                    <label for="ringkasan" class="form-label">Ringkasan Laporan</label>
+                    <textarea class="form-control" id="ringkasan" rows="4" required placeholder="Sila tulis ringkasan kejadian di sini..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mediaFiles" class="form-label">Muat Naik Bukti (Max 2)</label>
+                    <input type="file" class="form-control" id="mediaFiles" accept="image/*" multiple>
+                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">* Tarikh & Masa direkod secara automatik.</div>
+                    
+                    <div class="preview-container">
+                        <div class="preview-box">
+                            <span class="preview-placeholder">Gambar 1</span>
+                            <img id="imgPreview1">
+                        </div>
+                        <div class="preview-box">
+                            <span class="preview-placeholder">Gambar 2</span>
+                            <img id="imgPreview2">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-hantar">HANTAR LAPORAN</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="loading" id="loadingScreen">
+        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <div style="font-weight: 600;">Sedang Menghantar...</div>
+    </div>
+
+    <script>
+        // URL SCRIPT ANDA
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxeMF4MJMY_tHTrtPeUNe1PcCSh3tc-XxmMgIrmQbIcBgSu9e9fVQhiVRz5HXbH8Uhp/exec'; 
+
+        // Logic Preview Gambar
+        const fileInput = document.getElementById('mediaFiles');
+        const imgPreview1 = document.getElementById('imgPreview1');
+        const imgPreview2 = document.getElementById('imgPreview2');
+        const placeholders = document.querySelectorAll('.preview-placeholder');
+
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            
+            // Reset
+            imgPreview1.style.display = 'none';
+            imgPreview2.style.display = 'none';
+            placeholders.forEach(p => p.style.display = 'block');
+
+            if (files.length > 2) {
+                alert("Maksimum 2 gambar sahaja dibenarkan.");
+                fileInput.value = "";
+                return;
+            }
+
+            // Loop untuk preview
+            Array.from(files).forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        if (index === 0) {
+                            imgPreview1.src = e.target.result;
+                            imgPreview1.style.display = 'block';
+                            placeholders[0].style.display = 'none';
+                        } else if (index === 1) {
+                            imgPreview2.src = e.target.result;
+                            imgPreview2.style.display = 'block';
+                            placeholders[1].style.display = 'none';
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Logic Hantar Borang
+        document.getElementById('laporanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            document.getElementById('loadingScreen').style.display = 'flex';
+
+            const nama = document.getElementById('nama').value;
+            const tempat = document.getElementById('tempat').value;
+            const ringkasan = document.getElementById('ringkasan').value;
+            const files = document.getElementById('mediaFiles').files;
+
+            // Fungsi baca fail
+            const readFile = (file) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve({
+                        base64: reader.result,
+                        type: file.type,
+                        name: file.name
+                    });
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            };
+
+            const filePromises = Array.from(files).map(readFile);
+
+            Promise.all(filePromises).then(fileData => {
+                const payload = {
+                    nama: nama,
+                    tempat: tempat,
+                    ringkasan: ringkasan,
+                    files: fileData
+                };
+
+                fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    if(data.result === 'success') {
+                        alert('Laporan Berjaya Dihantar!');
+                        // Reset borang
+                        document.getElementById('laporanForm').reset();
+                        imgPreview1.style.display = 'none';
+                        imgPreview2.style.display = 'none';
+                        placeholders.forEach(p => p.style.display = 'block');
+                    } else {
+                        alert('Ralat: ' + JSON.stringify(data));
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    alert('Gagal menyambung ke server.');
+                    console.error(err);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
