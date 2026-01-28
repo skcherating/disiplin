@@ -18,21 +18,25 @@
         
         /* STYLE INPUT MURID */
         .student-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef; margin-bottom: 15px; }
-        .role-btn-group { display: flex; gap: 5px; margin-top: 5px; }
+        
+        /* Dropdown Styling */
+        .class-selector-row { display: flex; gap: 10px; margin-top: 10px; }
+        .form-select { font-size: 0.9rem; border-radius: 5px; }
+
+        .role-btn-group { display: flex; gap: 5px; margin-top: 10px; }
         .role-btn { flex: 1; padding: 8px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         
-        /* Warna Butang Pilihan */
         .role-btn.pelaku-mode { color: #dc3545; border-color: #dc3545; }
         .role-btn.pelaku-mode.active { background: #dc3545; color: white; }
-        
         .role-btn.mangsa-mode { color: #198754; border-color: #198754; }
         .role-btn.mangsa-mode.active { background: #198754; color: white; }
 
-        .btn-add { width: 100%; margin-top: 10px; background: #6c757d; color: white; border: none; padding: 8px; border-radius: 5px; }
+        .btn-add { width: 100%; margin-top: 15px; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: 600; }
         .btn-add:hover { background: #5a6268; }
 
         /* SENARAI MURID */
         .list-group-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
+        .student-details { font-size: 0.8rem; color: #666; display: block; }
         .badge-pelaku { background: #ffe6e6; color: #dc3545; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .badge-mangsa { background: #e6f6ec; color: #198754; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .btn-remove { color: #aaa; cursor: pointer; border: none; background: none; }
@@ -69,6 +73,27 @@
                 <div class="student-section">
                     <input type="text" id="inputMurid" class="form-control" placeholder="Masukkan Nama Murid">
                     
+                    <div class="class-selector-row">
+                        <select id="inputTahun" class="form-select">
+                            <option value="">Pilih Tahun</option>
+                            <option value="Pra Sekolah">Pra Sekolah</option>
+                            <option value="Tahun 1">Tahun 1</option>
+                            <option value="Tahun 2">Tahun 2</option>
+                            <option value="Tahun 3">Tahun 3</option>
+                            <option value="Tahun 4">Tahun 4</option>
+                            <option value="Tahun 5">Tahun 5</option>
+                            <option value="Tahun 6">Tahun 6</option>
+                        </select>
+                        
+                        <select id="inputKelas" class="form-select">
+                            <option value="">Pilih Kelas</option>
+                            <option value="Al-Farabi">Al-Farabi</option>
+                            <option value="Al-Kindi">Al-Kindi</option>
+                            <option value="Al-Biruni">Al-Biruni</option>
+                            <option value="Al-Razi">Al-Razi</option>
+                        </select>
+                    </div>
+
                     <div class="role-btn-group">
                         <button type="button" class="role-btn pelaku-mode active" id="btnPelaku" onclick="setRole('Pelaku')">PELAKU</button>
                         <button type="button" class="role-btn mangsa-mode" id="btnMangsa" onclick="setRole('Mangsa')">MANGSA</button>
@@ -108,7 +133,7 @@
 </div>
 
 <script>
-    // --- URL WEB APP YANG BETUL ---
+    // --- MASUKKAN URL WEB APP YANG BETUL DI SINI ---
     const APP_URL = "https://script.google.com/macros/s/AKfycbw8j2EnihCLagap05bGpgQ4lbbpRPdsK0-3mS8msG4zSOgtwUHP3Ym-8xE1fD7K5Nek/exec"; 
 
     // --- LOGIC MURID ---
@@ -117,7 +142,6 @@
 
     function setRole(role) {
         currentRole = role;
-        // Update UI butang
         if(role === 'Pelaku') {
             document.getElementById('btnPelaku').classList.add('active');
             document.getElementById('btnMangsa').classList.remove('active');
@@ -129,10 +153,27 @@
 
     function tambahMurid() {
         let nama = document.getElementById('inputMurid').value.trim();
-        if(!nama) return alert("Sila masukkan nama murid.");
+        let tahun = document.getElementById('inputTahun').value;
+        let kelas = document.getElementById('inputKelas').value;
 
-        senaraiMurid.push({ nama: nama, peranan: currentRole });
-        document.getElementById('inputMurid').value = ""; // Clear input
+        // Validation
+        if(!nama) return alert("Sila masukkan nama murid.");
+        if(!tahun) return alert("Sila pilih Tahun.");
+        if(!kelas) return alert("Sila pilih Kelas.");
+
+        // Tambah object lengkap ke dalam array
+        senaraiMurid.push({ 
+            nama: nama, 
+            tahun: tahun, 
+            kelas: kelas, 
+            peranan: currentRole 
+        });
+
+        // Reset inputs
+        document.getElementById('inputMurid').value = ""; 
+        document.getElementById('inputTahun').value = ""; 
+        document.getElementById('inputKelas').value = ""; 
+        
         renderList();
     }
 
@@ -157,6 +198,7 @@
                         <div>
                             <span class="${badge}">${m.peranan}</span> 
                             <span class="fw-bold ms-2">${m.nama}</span>
+                            <span class="student-details">${m.tahun} ${m.kelas}</span>
                         </div>
                         <button type="button" class="btn-remove" onclick="padamMurid(${i})"><i class="fas fa-trash"></i></button>
                     </li>
@@ -216,7 +258,6 @@
         let tempat = document.getElementById('tempat').value;
         let ringkasan = document.getElementById('ringkasan').value;
         
-        // Baca fail dulu
         let filePromises = Array.from(dt.files).map(file => {
             return new Promise((resolve, reject) => {
                 let r = new FileReader();
@@ -251,7 +292,7 @@
             })
             .catch(err => {
                 document.getElementById('loading').style.display = 'none';
-                alert("Gagal sambung ke server. Sila semak sambungan internet anda.");
+                alert("Gagal sambung ke server.");
             });
         });
     });
