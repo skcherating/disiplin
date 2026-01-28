@@ -16,7 +16,6 @@
         .app-title { font-weight: 700; font-size: 1.2rem; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         .app-body { padding: 25px; }
         
-        /* STYLE INPUT MURID */
         .student-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef; margin-bottom: 15px; }
         .class-selector-row { display: flex; gap: 10px; margin-top: 10px; }
         .form-select { font-size: 0.9rem; border-radius: 5px; }
@@ -25,13 +24,13 @@
         .role-btn.pelaku-mode.active { background: #dc3545; color: white; border-color: #dc3545; }
         .role-btn.mangsa-mode.active { background: #198754; color: white; border-color: #198754; }
         .btn-add { width: 100%; margin-top: 15px; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: 600; }
+        
         .list-group-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
         .student-details { font-size: 0.8rem; color: #666; display: block; }
         .badge-pelaku { background: #ffe6e6; color: #dc3545; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .badge-mangsa { background: #e6f6ec; color: #198754; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .btn-remove { color: #aaa; cursor: pointer; border: none; background: none; }
 
-        /* GAMBAR / VIDEO / AUDIO */
         .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .preview-box { 
             position: relative; height: 120px; border: 1px solid #ddd; border-radius: 5px; 
@@ -40,7 +39,6 @@
         .preview-box img { width: 100%; height: 100%; object-fit: cover; }
         .preview-box video { width: 100%; height: 100%; object-fit: contain; }
         .preview-box audio { width: 90%; }
-        
         .btn-del-img { position: absolute; top: 5px; right: 5px; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 10px; border: none; cursor: pointer; z-index: 10; }
 
         .btn-submit { background: #0d6efd; color: white; width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
@@ -112,6 +110,9 @@
 
             <div class="mb-3">
                 <label class="form-label">Bukti (Gambar/Video/Audio) - Max 2</label>
+                <div style="font-size: 0.8rem; color: #dc3545; margin-bottom: 5px; font-weight: bold;">
+                    * Had Saiz Maksimum: 25MB setiap fail. Video panjang mungkin gagal dihantar.
+                </div>
                 <input type="file" id="files" class="form-control" accept="image/*,video/*,audio/*" multiple>
                 <div class="preview-grid" id="previewGrid"></div>
             </div>
@@ -124,12 +125,16 @@
 <div class="loading" id="loading">
     <div class="spinner-border text-primary"></div>
     <div class="mt-2 fw-bold">Sedang Menghantar...</div>
-    <div style="font-size: 0.8rem">Video mungkin mengambil masa lama...</div>
+    <div style="font-size: 0.8rem">Sila tunggu sebentar. Fail besar mengambil masa.</div>
 </div>
 
 <script>
-    // --- MASUKKAN URL WEB APP ANDA DI SINI ---
+    // --- GANTIKAN URL WEB APP ANDA ---
     const APP_URL = "https://script.google.com/macros/s/AKfycbw8j2EnihCLagap05bGpgQ4lbbpRPdsK0-3mS8msG4zSOgtwUHP3Ym-8xE1fD7K5Nek/exec"; 
+
+    // --- CONFIG SAIZ FAIL ---
+    const MAX_SIZE_MB = 25; 
+    const MAX_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
     // --- LOGIC MURID ---
     let senaraiMurid = [];
@@ -193,16 +198,23 @@
         }
     }
 
-    // --- LOGIC PREVIEW MEDIA (GAMBAR/VIDEO/AUDIO) ---
+    // --- LOGIC MEDIA ---
     let dt = new DataTransfer();
     document.getElementById('files').addEventListener('change', function(){
         dt = new DataTransfer(); 
-        // Terima Image, Video, Audio
+        let totalSize = 0;
+
         for(let f of this.files) {
+            // Check Size
+            if (f.size > MAX_BYTES) {
+                alert(`Fail "${f.name}" terlalu besar (${(f.size/1024/1024).toFixed(2)}MB). Maksimum ${MAX_SIZE_MB}MB.`);
+                continue; // Skip file ini
+            }
             if(f.type.startsWith('image/') || f.type.startsWith('video/') || f.type.startsWith('audio/')) {
                 dt.items.add(f);
             }
         }
+
         if(dt.files.length > 2) { alert("Maksimum 2 fail sahaja."); return; }
         this.files = dt.files;
         renderMedia();
@@ -216,15 +228,9 @@
             let reader = new FileReader();
             reader.onload = (e) => {
                 let content = "";
-                
-                // Tentukan elemen berdasarkan jenis fail
-                if(f.type.startsWith('image/')) {
-                    content = `<img src="${e.target.result}">`;
-                } else if (f.type.startsWith('video/')) {
-                    content = `<video src="${e.target.result}" controls></video>`;
-                } else if (f.type.startsWith('audio/')) {
-                    content = `<audio src="${e.target.result}" controls></audio>`;
-                }
+                if(f.type.startsWith('image/')) content = `<img src="${e.target.result}">`;
+                else if (f.type.startsWith('video/')) content = `<video src="${e.target.result}" controls></video>`;
+                else if (f.type.startsWith('audio/')) content = `<audio src="${e.target.result}" controls></audio>`;
 
                 grid.innerHTML += `
                     <div class="preview-box">
@@ -290,7 +296,7 @@
             })
             .catch(err => {
                 document.getElementById('loading').style.display = 'none';
-                alert("Gagal sambung ke server.");
+                alert("Gagal sambung ke server. Mungkin fail terlalu besar atau sambungan internet lemah.");
             });
         });
     });
