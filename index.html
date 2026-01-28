@@ -16,13 +16,16 @@
         .app-title { font-weight: 700; font-size: 1.2rem; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         .app-body { padding: 25px; }
         
+        /* STYLE INPUT MURID */
         .student-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef; margin-bottom: 15px; }
         .class-selector-row { display: flex; gap: 10px; margin-top: 10px; }
         .form-select { font-size: 0.9rem; border-radius: 5px; }
+        
         .role-btn-group { display: flex; gap: 5px; margin-top: 10px; }
         .role-btn { flex: 1; padding: 8px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         .role-btn.pelaku-mode.active { background: #dc3545; color: white; border-color: #dc3545; }
         .role-btn.mangsa-mode.active { background: #198754; color: white; border-color: #198754; }
+        
         .btn-add { width: 100%; margin-top: 15px; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: 600; }
         
         .list-group-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
@@ -31,6 +34,7 @@
         .badge-mangsa { background: #e6f6ec; color: #198754; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .btn-remove { color: #aaa; cursor: pointer; border: none; background: none; }
 
+        /* PREVIEW */
         .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .preview-box { 
             position: relative; height: 120px; border: 1px solid #ddd; border-radius: 5px; 
@@ -111,7 +115,7 @@
             <div class="mb-3">
                 <label class="form-label">Bukti (Gambar/Video/Audio) - Max 2</label>
                 <div style="font-size: 0.8rem; color: #dc3545; margin-bottom: 5px; font-weight: bold;">
-                    * Had Saiz Maksimum: 25MB setiap fail. Video panjang mungkin gagal dihantar.
+                    * Had Saiz Maksimum: 25MB setiap fail.
                 </div>
                 <input type="file" id="files" class="form-control" accept="image/*,video/*,audio/*" multiple>
                 <div class="preview-grid" id="previewGrid"></div>
@@ -125,12 +129,12 @@
 <div class="loading" id="loading">
     <div class="spinner-border text-primary"></div>
     <div class="mt-2 fw-bold">Sedang Menghantar...</div>
-    <div style="font-size: 0.8rem">Sila tunggu sebentar. Fail besar mengambil masa.</div>
+    <div style="font-size: 0.8rem">Sila tunggu, fail sedang diproses...</div>
 </div>
 
 <script>
-    // --- GANTIKAN URL WEB APP ANDA ---
-    const APP_URL = "https://script.google.com/macros/s/AKfycbw8j2EnihCLagap05bGpgQ4lbbpRPdsK0-3mS8msG4zSOgtwUHP3Ym-8xE1fD7K5Nek/exec"; 
+    // --- MASUKKAN URL WEB APP YANG BETUL DI SINI ---
+    const APP_URL = "https://script.google.com/macros/s/AKfycbwffFPWz6JYuybM4rHnw6_kK6QX-ndObb9l1uu_Jdd_sDcoq9_ktxE_2xZXcCsbpSnx/exec"; 
 
     // --- CONFIG SAIZ FAIL ---
     const MAX_SIZE_MB = 25; 
@@ -202,13 +206,11 @@
     let dt = new DataTransfer();
     document.getElementById('files').addEventListener('change', function(){
         dt = new DataTransfer(); 
-        let totalSize = 0;
-
+        
         for(let f of this.files) {
-            // Check Size
             if (f.size > MAX_BYTES) {
                 alert(`Fail "${f.name}" terlalu besar (${(f.size/1024/1024).toFixed(2)}MB). Maksimum ${MAX_SIZE_MB}MB.`);
-                continue; // Skip file ini
+                continue; 
             }
             if(f.type.startsWith('image/') || f.type.startsWith('video/') || f.type.startsWith('audio/')) {
                 dt.items.add(f);
@@ -296,7 +298,7 @@
             })
             .catch(err => {
                 document.getElementById('loading').style.display = 'none';
-                alert("Gagal sambung ke server. Mungkin fail terlalu besar atau sambungan internet lemah.");
+                alert("Gagal sambung ke server.");
             });
         });
     });
