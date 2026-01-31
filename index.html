@@ -18,44 +18,28 @@
         
         .student-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef; margin-bottom: 15px; }
         .class-selector-row { display: flex; gap: 10px; margin-top: 10px; }
-        .form-select { font-size: 0.9rem; border-radius: 5px; }
+        .form-control[readonly] { background-color: #e9ecef; cursor: not-allowed; } 
+        
         .role-btn-group { display: flex; gap: 5px; margin-top: 10px; }
         .role-btn { flex: 1; padding: 8px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         .role-btn.pelaku-mode.active { background: #dc3545; color: white; border-color: #dc3545; }
         .role-btn.mangsa-mode.active { background: #198754; color: white; border-color: #198754; }
-        .btn-add { width: 100%; margin-top: 15px; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: 600; }
         
+        .btn-add { width: 100%; margin-top: 15px; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: 600; }
         .list-group-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
         .student-details { font-size: 0.8rem; color: #666; display: block; }
         .badge-pelaku { background: #ffe6e6; color: #dc3545; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .badge-mangsa { background: #e6f6ec; color: #198754; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.75rem; }
         .btn-remove { color: #aaa; cursor: pointer; border: none; background: none; }
 
-        /* STYLE FILE UPLOAD */
-        .file-upload-wrapper {
-            background: #f8f9fa;
-            border: 1px dashed #ced4da;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
+        .file-upload-wrapper { background: #f8f9fa; border: 1px dashed #ced4da; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
         .file-label { font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; display: block; }
-        
-        .preview-box { 
-            position: relative; height: 100px; border: 1px solid #ddd; border-radius: 5px; 
-            overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;
-            margin-top: 5px; display: none; 
-        }
+        .preview-box { position: relative; height: 100px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; background: #000; display: none; align-items: center; justify-content: center; margin-top: 5px; }
         .preview-box img { width: 100%; height: 100%; object-fit: cover; }
         .preview-box video { width: 100%; height: 100%; object-fit: contain; }
         .preview-box audio { width: 90%; }
+        .btn-clear-file { margin-top: 5px; font-size: 0.8rem; color: #dc3545; cursor: pointer; background: none; border: none; padding: 0; display: none; }
         
-        .btn-clear-file {
-            margin-top: 5px; font-size: 0.8rem; color: #dc3545; cursor: pointer; 
-            background: none; border: none; padding: 0; display: none;
-        }
-        .btn-clear-file:hover { text-decoration: underline; }
-
         .btn-submit { background: #0d6efd; color: white; width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
         .loading { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; display:none; flex-direction:column; justify-content:center; align-items:center; }
     </style>
@@ -73,35 +57,24 @@
             
             <div class="mb-3">
                 <label class="form-label">Nama Pelapor</label>
-                <input class="form-control" list="senaraiGuruOptions" id="nama" placeholder="Taip untuk cari nama..." required autocomplete="off">
+                <input class="form-control" list="senaraiGuruOptions" id="nama" placeholder="Taip nama anda..." required autocomplete="off">
                 <datalist id="senaraiGuruOptions">
-                    </datalist>
+                    <option value="ASRI BIN MOHAMED"><option value="TUAN KAMARIAH BINTI TUAN SARIF"><option value="ZAINON BINTI HJ JUFRI"><option value="ASYRAF BIN ROSLAN"><option value="AMIRAH BINTI CHE AZUHA"><option value="AZLAN BIN DAUD"><option value="AZLINA BINTI HANAPI"><option value="AMANI BINTI AWANG QAMARULDEEN"><option value="ANWAR SHAFIQ BIN JAMALUDIN"><option value="ANIS SYAZWANI BINTI MAT ISA"><option value="BAHJATU SHOLIHAH BINTI RAMAN"><option value="FAZILAH BINTI MUDA"><option value="HANIS AYUNI BINTI HADI"><option value="KU MASITAH BINTI KU WIL"><option value="MAKTAR BIN MOHAMED"><option value="MOHD AFIZU BIN ADENAN"><option value="MUHAMAD HAKIMI BIN AMER"><option value="MUHAMMAD SAUFI FIRDAUS BIN SABUDIN"><option value="NOOR IDAYU BINTI ISMAIL"><option value="NOR HUDA DHAMIRAH BINTI ISA"><option value="NUR IDAYU BINTI ABDULL ROZAK"><option value="NOR NAZAHIYAH BINTI NASARUDIN"><option value="NOR SHAZIRA BINTI AZIZ"><option value="NOR SYAZALIAH BINTI MAT RADZI"><option value="NURIN IZZAH BINTI ROSMAN"><option value="NUR FATIHATULHUSNA BINTI YA'ACOB"><option value="NURUL ADILAH BINTI ZAKARIA"><option value="RAMLAH BINTI HASSAN"><option value="RASHIDAH BINTI ZULKIFLI"><option value="RAUDZAH BINTI HAJI KAMALUDIN"><option value="RAZIAH BINTI WAHAB"><option value="ROSHANIDA BINTI ROHANUDDIN"><option value="SITI ZURAIHA BINTI MAPOL"><option value="SUHAIDA BINTI SIDEK"><option value="SUHAIMI BIN ISMAIL"><option value="SUZIMARLIANA BINTI IBRAHIM">
+                </datalist>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Maklumat Murid</label>
                 <div class="student-section">
-                    <input type="text" id="inputMurid" class="form-control" placeholder="Masukkan Nama Murid">
                     
+                    <input class="form-control mb-2" list="senaraiMuridOptions" id="inputMurid" placeholder="Cari Nama Murid..." onchange="checkAutoFill()">
+                    <datalist id="senaraiMuridOptions"></datalist>
+
                     <div class="class-selector-row">
-                        <select id="inputTahun" class="form-select">
-                            <option value="">Pilih Tahun</option>
-                            <option value="Pra Sekolah">Pra Sekolah</option>
-                            <option value="Tahun 1">Tahun 1</option>
-                            <option value="Tahun 2">Tahun 2</option>
-                            <option value="Tahun 3">Tahun 3</option>
-                            <option value="Tahun 4">Tahun 4</option>
-                            <option value="Tahun 5">Tahun 5</option>
-                            <option value="Tahun 6">Tahun 6</option>
-                        </select>
-                        <select id="inputKelas" class="form-select">
-                            <option value="">Pilih Kelas</option>
-                            <option value="Al-Farabi">Al-Farabi</option>
-                            <option value="Al-Kindi">Al-Kindi</option>
-                            <option value="Al-Biruni">Al-Biruni</option>
-                            <option value="Al-Razi">Al-Razi</option>
-                        </select>
+                        <input type="text" id="inputTahun" class="form-control" placeholder="Tahun (Auto)" readonly>
+                        <input type="text" id="inputKelas" class="form-control" placeholder="Kelas (Auto)" readonly>
                     </div>
+                    <div style="font-size: 0.75rem; color: #666; margin-top: 3px;">* Tahun & Kelas akan masuk automatik bila nama dipilih.</div>
 
                     <div class="role-btn-group">
                         <button type="button" class="role-btn pelaku-mode active" id="btnPelaku" onclick="setRole('Pelaku')">PELAKU</button>
@@ -127,14 +100,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Muat Naik Bukti (Max 25MB/fail)</label>
-                
                 <div class="file-upload-wrapper">
                     <span class="file-label">Bukti 1 (Wajib)</span>
                     <input type="file" id="file1" class="form-control" accept="image/*,video/*,audio/*" onchange="handleFileSelect(this, 'preview1', 'clear1')">
                     <div id="preview1" class="preview-box"></div>
                     <button type="button" id="clear1" class="btn-clear-file" onclick="clearFile('file1', 'preview1', 'clear1')"><i class="fas fa-trash"></i> Padam Fail 1</button>
                 </div>
-
                 <div class="file-upload-wrapper">
                     <span class="file-label">Bukti 2 (Pilihan)</span>
                     <input type="file" id="file2" class="form-control" accept="image/*,video/*,audio/*" onchange="handleFileSelect(this, 'preview2', 'clear2')">
@@ -155,39 +126,46 @@
 </div>
 
 <script>
-    // --- MASUKKAN URL WEB APP ANDA DI SINI ---
-    const APP_URL = "MASUKKAN_URL_WEB_APP_ANDA_DI_SINI"; 
+    // URL WEB APP
+    const APP_URL = "https://script.google.com/macros/s/AKfycbzc4l9BZl7YE_5D63TxI6S2ZFIDD3HEgnMYc57c8e7OBPbOUoN2Zb3X_SLvgMaZtlFXUA/exec"; 
 
-    // --- SENARAI NAMA GURU & AKP (Dari Excel Anda) ---
-    const senaraiGuru = [
-        "ASRI BIN MOHAMED", "TUAN KAMARIAH BINTI TUAN SARIF", "ZAINON BINTI HJ JUFRI",
-        "ASYRAF BIN ROSLAN", "AMIRAH BINTI CHE AZUHA", "AZLAN BIN DAUD",
-        "AZLINA BINTI HANAPI", "AMANI BINTI AWANG QAMARULDEEN", "ANWAR SHAFIQ BIN JAMALUDIN",
-        "ANIS SYAZWANI BINTI MAT ISA", "BAHJATU SHOLIHAH BINTI RAMAN", "FAZILAH BINTI MUDA",
-        "HANIS AYUNI BINTI HADI", "KU MASITAH BINTI KU WIL", "MAKTAR BIN MOHAMED",
-        "MOHD AFIZU BIN ADENAN", "MUHAMAD HAKIMI BIN AMER", "MUHAMMAD SAUFI FIRDAUS BIN SABUDIN",
-        "NURAZIZAH BINTI OMAR", "NOOR IDAYU BINTI ISMAIL", "NOR HUDA DHAMIRAH BINTI ISA",
-        "NUR IDAYU BINTI ABDULL ROZAK", "NOR NAZAHIYAH BINTI NASARUDIN", "NOR SHAZIRA BINTI AZIZ",
-        "NOR SYAZALIAH BINTI MAT RADZI", "NURIN IZZAH BINTI ROSMAN", "NUR FATIHATULHUSNA BINTI YA'ACOB",
-        "NURUL ADILAH BINTI ZAKARIA", "RAMLAH BINTI HASSAN", "RAZIAH BINTI WAHAB",
-        "RAUDZAH BINTI HAJI KAMALUDIN", "RASHIDAH BINTI ZULKIFLI", "ROSHANIDA BINTI ROHANUDDIN",
-        "SITI ZURAIHA BINTI MAPOL", "SUHAIDA BINTI SIDEK", "SUHAIMI BIN ISMAIL",
-        "SUZIMARLIANA BINTI IBRAHIM"
-        // NOTA: Anda boleh copy-paste nama lain di sini jika ada yang tertinggal
-    ];
+    // VARIABLE DATABASE MURID
+    let dbMurid = []; 
 
-    // Masukkan senarai nama ke dalam Datalist HTML
-    const datalist = document.getElementById('senaraiGuruOptions');
-    senaraiGuru.sort(); // Susun ikut abjad
-    senaraiGuru.forEach(nama => {
-        const option = document.createElement('option');
-        option.value = nama;
-        datalist.appendChild(option);
-    });
+    // --- 1. MULA-MULA: TARIK DATA MURID DARI SHEET ---
+    window.onload = function() {
+        // Panggil fungsi Google Script 'getSenaraiMurid'
+        google.script.run.withSuccessHandler(simpanDataMurid).getSenaraiMurid();
+    };
 
-    // --- SETTING LAIN ---
-    const MAX_SIZE_MB = 25; 
-    const MAX_BYTES = MAX_SIZE_MB * 1024 * 1024;
+    function simpanDataMurid(data) {
+        dbMurid = data; 
+        const datalist = document.getElementById('senaraiMuridOptions');
+        data.forEach(function(row) {
+            // row[0] = Nama, row[1] = Tahun, row[2] = Kelas
+            let option = document.createElement('option');
+            option.value = row[0]; 
+            datalist.appendChild(option);
+        });
+        console.log("Data Murid Berjaya Dimuatkan: " + data.length + " murid.");
+    }
+
+    // --- 2. FUNGSI AUTO-FILL BILA NAMA DIPILIH ---
+    function checkAutoFill() {
+        let inputVal = document.getElementById('inputMurid').value;
+        let tahunField = document.getElementById('inputTahun');
+        let kelasField = document.getElementById('inputKelas');
+
+        // Cari murid dalam database
+        let muridJumpa = dbMurid.find(row => row[0] === inputVal);
+
+        if (muridJumpa) {
+            tahunField.value = muridJumpa[1]; // Isi Tahun
+            kelasField.value = muridJumpa[2]; // Isi Kelas
+        } 
+    }
+
+    // --- LOGIC TAMBAH KE SENARAI ---
     let senaraiMurid = [];
     let currentRole = 'Pelaku';
 
@@ -207,11 +185,11 @@
         let tahun = document.getElementById('inputTahun').value;
         let kelas = document.getElementById('inputKelas').value;
 
-        if(!nama) return alert("Sila masukkan nama murid.");
-        if(!tahun) return alert("Sila pilih Tahun.");
-        if(!kelas) return alert("Sila pilih Kelas.");
+        if(!nama) return alert("Sila masukkan/pilih nama murid.");
+        if(!tahun || !kelas) return alert("Sila pilih nama yang betul supaya Tahun & Kelas keluar automatik.");
 
         senaraiMurid.push({ nama: nama, tahun: tahun, kelas: kelas, peranan: currentRole });
+        
         document.getElementById('inputMurid').value = ""; 
         document.getElementById('inputTahun').value = ""; 
         document.getElementById('inputKelas').value = ""; 
@@ -249,7 +227,10 @@
         }
     }
 
-    // --- LOGIC FILE BERASINGAN ---
+    // --- LOGIC FILE & SUBMIT ---
+    const MAX_SIZE_MB = 25; 
+    const MAX_BYTES = MAX_SIZE_MB * 1024 * 1024;
+
     function handleFileSelect(input, previewId, clearBtnId) {
         const file = input.files[0];
         const previewBox = document.getElementById(previewId);
@@ -289,11 +270,9 @@
         document.getElementById(clearBtnId).style.display = 'none';
     }
 
-    // --- HANTAR ---
     document.getElementById('formLaporan').addEventListener('submit', function(e){
         e.preventDefault();
         
-        if(APP_URL.includes("MASUKKAN_URL")) return alert("Sila masukkan URL Apps Script dahulu!");
         if(senaraiMurid.length === 0) return alert("Sila tambah sekurang-kurangnya seorang murid.");
 
         document.getElementById('loading').style.display = 'flex';
