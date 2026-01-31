@@ -126,8 +126,8 @@
 </div>
 
 <script>
-    // URL WEB APP
-    const APP_URL = "https://script.google.com/macros/s/AKfycbzc4l9BZl7YE_5D63TxI6S2ZFIDD3HEgnMYc57c8e7OBPbOUoN2Zb3X_SLvgMaZtlFXUA/exec"; 
+    // --- URL WEB APP BARU ANDA ---
+    const APP_URL = "https://script.google.com/macros/s/AKfycbwMb0cTbH9huJU6UYT3MB0JWCicYyzlxHA_FHbSZWNuZgGrw_S8Bnwtr0Hu-7ALTJL4/exec"; 
 
     // VARIABLE DATABASE MURID
     let dbMurid = []; 
@@ -135,18 +135,30 @@
     // --- 1. MULA-MULA: TARIK DATA MURID DARI SHEET ---
     window.onload = function() {
         // Panggil fungsi Google Script 'getSenaraiMurid'
-        google.script.run.withSuccessHandler(simpanDataMurid).getSenaraiMurid();
+        google.script.run
+            .withSuccessHandler(simpanDataMurid)
+            .withFailureHandler(function(err){ 
+                console.error("Gagal tarik data:", err); 
+            })
+            .getSenaraiMurid();
     };
 
     function simpanDataMurid(data) {
+        if(!data || data.length === 0) {
+            console.warn("Tiada data murid dijumpai.");
+            return;
+        }
         dbMurid = data; 
         const datalist = document.getElementById('senaraiMuridOptions');
+        
+        // Gunakan Fragment untuk prestasi lebih pantas
+        const fragment = document.createDocumentFragment();
         data.forEach(function(row) {
-            // row[0] = Nama, row[1] = Tahun, row[2] = Kelas
             let option = document.createElement('option');
-            option.value = row[0]; 
-            datalist.appendChild(option);
+            option.value = row[0]; // Nama Murid
+            fragment.appendChild(option);
         });
+        datalist.appendChild(fragment);
         console.log("Data Murid Berjaya Dimuatkan: " + data.length + " murid.");
     }
 
@@ -186,7 +198,7 @@
         let kelas = document.getElementById('inputKelas').value;
 
         if(!nama) return alert("Sila masukkan/pilih nama murid.");
-        if(!tahun || !kelas) return alert("Sila pilih nama yang betul supaya Tahun & Kelas keluar automatik.");
+        if(!tahun || !kelas) return alert("Sila pilih nama yang betul dari senarai supaya Tahun & Kelas keluar automatik.");
 
         senaraiMurid.push({ nama: nama, tahun: tahun, kelas: kelas, peranan: currentRole });
         
