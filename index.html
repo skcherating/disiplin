@@ -37,7 +37,7 @@
 
 <div class="app-card">
     <div class="app-header">
-        <img src="logo_sekolah.jpg" alt="Logo" class="main-logo">
+        <img src="logo_sekolah.jpg" alt="Logo" class="main-logo" onerror="this.style.display='none'">
         <div class="app-title">PELAPORAN DISIPLIN<br>SK CHERATING</div>
     </div>
 
@@ -107,10 +107,13 @@
 </div>
 
 <script>
-    const APP_URL = "https://script.google.com/macros/s/AKfycbwMb0cTbH9huJU6UYT3MB0JWCicYyzlxHA_FHbSZWNuZgGrw_S8Bnwtr0Hu-7ALTJL4/exec";
+    // ==========================================================
+    // URL WEB APP BARU (TELAH DIKEMASKINI)
+    // ==========================================================
+    const APP_URL = "https://script.google.com/macros/s/AKfycbwrCsuP8I0ZQGyPWEsW26CPvEHFdncUC6RjBmw3FV9waqhW1Wih6CDBzYq093IiMY3a/exec";
+    // ==========================================================
 
-    // --- SENARAI MURID (Hardcoded) ---
-    // Saya telah menukar single quote (') kepada double quote (") untuk elak error
+    // DATABASE MURID (HARDCODED SEPERTI PERMINTAAN)
     const dbMurid = [
         [" ABDUL RAYYAN MIKAIL BIN ABDUL RASHID", "1", "AL- BIRUNI"],
         ["AHMAD DANISH AQEEL BIN AHMAD BARDAIN", "1", "AL- BIRUNI"],
@@ -880,11 +883,9 @@
 
     window.onload = function() {
         const datalist = document.getElementById('senaraiMuridOptions');
-        // Guna Fragment untuk prestasi maksimum (800 nama)
         const fragment = document.createDocumentFragment();
         
         dbMurid.forEach(function(row) {
-            // row[0] = Nama, row[1] = Tahun, row[2] = Kelas
             let option = document.createElement('option');
             option.value = row[0]; // Nama Murid
             fragment.appendChild(option);
@@ -894,7 +895,6 @@
 
     function checkAutoFill() {
         let inputVal = document.getElementById('inputMurid').value;
-        // Cari murid dalam array
         let muridJumpa = dbMurid.find(row => row[0] === inputVal);
 
         if (muridJumpa) {
@@ -1042,7 +1042,7 @@
             })
             .catch(err => {
                 document.getElementById('loading').style.display = 'none';
-                alert("Gagal sambung ke server.");
+                alert("Gagal sambung ke server. Sila semak internet atau URL Script.");
             });
         });
     });
